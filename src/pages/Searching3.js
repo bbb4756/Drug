@@ -4,13 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../component/Header';
 import Swal from 'sweetalert2';
 // import blank_image from '../../public/img/blank_image.png';
-
+import loading_pill from '../../src/img/search_pill_waiting.png';
 const Searching3 = () => {
   const [search, setSearch] = useState('');
   const [coverName, setCoverName] = useState('');
+  const [pillName, setPillName] = useState('waiting...');
   const [isDisabled, setDisabled] = useState(false);
   const coverRef = useRef();
   const imgRef = useRef();
+  const imgResRef = useRef();
+  const [image, setImage] = useState(loading_pill);
 
   const [result, setResult] = useState([]);
   const onChange = e => {
@@ -27,9 +30,7 @@ const Searching3 = () => {
 
   const checkUpload = async e => {
     const formDataImg = new FormData();
-    const formDataAudio = new FormData();
     formDataImg.append('cover', e.target.cover.files[0]);
-    formDataAudio.append('music', e.target.music.files[0]);
     console.log('완료');
   };
 
@@ -47,20 +48,8 @@ const Searching3 = () => {
 
   const upload = async e => {
     e.preventDefault();
-    setDisabled(true);
-    Swal.fire({
-      title: '업로드 하시겠습니까?',
-      showCancelButton: true,
-      confirmButtonColor: '#fff',
-      confirmButtonText: 'Mint Music Token',
-      cancelButtonText: 'X',
-      color: '#fff',
-      background: '#333',
-    }).then(result => {
-      if (result.isConfirmed) {
-        checkUpload(e);
-      }
-    });
+
+    checkUpload(e);
   };
 
   return (
@@ -70,43 +59,7 @@ const Searching3 = () => {
         <SearchTitle>
           <span>📷 이미지로 검색하기</span>
         </SearchTitle>
-        <Form
-          onSubmit={e => {
-            e.preventDefault();
-            console.log(search);
-            onSearch(search);
-          }}
-        >
-          <input
-            type="text"
-            value={search}
-            onChange={onChange}
-            placeholder={'검색어를 입력하세요.'}
-            style={{
-              width: '900px',
-              height: '40px',
-              borderRadius: '10px',
-              borderWidth: 0.5,
-              borderColor: '#efefef',
-            }}
-          />
-          <button
-            style={{
-              color: '#EDEDED',
-              width: '100px',
-              height: '40px',
-              borderRadius: '10px',
-              background: '#949BA0',
-              borderWidth: 0.5,
-              borderColor: '#dcdcdc',
-            }}
-            type="submit"
-          >
-            찾기
-          </button>
-        </Form>
-        {/* 검색결과 */}
-        {/* <SearchBox> */}
+
         <Container>
           <AlbumBox>
             <form encType="multipart/form-data" onSubmit={upload}>
@@ -135,8 +88,14 @@ const Searching3 = () => {
                       onChange={readURL}
                       src=""
                     />
+                    <input type="submit" id="submit" value="검색" />
                   </UploadInput>
                 </ImgUpload>
+                <ImgResultBox>
+                  <h3>검색결과</h3>
+                  <img id="preview" ref={imgResRef} src={image} />
+                  <span> 약품명 : {pillName} </span>
+                </ImgResultBox>
               </UploadBox>
             </form>
           </AlbumBox>
@@ -148,7 +107,7 @@ const Searching3 = () => {
 };
 const MainContainer = styled.div`
   width: 100%;
-  height: 1200px;
+  height: 700px;
   background-color: #efefef;
   position: relative;
 `;
@@ -189,7 +148,7 @@ const SearchContainer = styled.div`
 `;
 export const Container = styled.div`
   width: 80%;
-  height: 800px;
+  height: 500px;
   margin: 0 auto;
   margin-top: 40px;
   > h1 {
@@ -222,11 +181,12 @@ export const AlbumBox = styled.div`
 `;
 
 export const UploadBox = styled.div`
-  width: 38%;
+  width: 90%;
   height: 440px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: space-around;
+  align-items: center;
 `;
 
 export const ImgUpload = styled.div`
@@ -237,12 +197,36 @@ export const ImgUpload = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  /* background-color: pink; */
   > h3 {
     color: #999999;
     margin: 3px 5px;
     align-self: flex-start;
     font-size: 17px;
-    font-family: 'Fly';
+    /* background-color: yellow; */
+  }
+  > img {
+    width: 180px;
+    height: 180px;
+  }
+`;
+
+const ImgResultBox = styled.div`
+  padding-left: 10px;
+  border: 0.5px dashed #646464;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: red; */
+  > h3 {
+    color: #999999;
+    align-self: flex-start;
+    font-size: 17px;
+    /* font-family: 'Fly'; */
+    /* background-color: green; */
   }
   > img {
     width: 180px;
