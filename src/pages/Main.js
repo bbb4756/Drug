@@ -10,39 +10,7 @@ function Main() {
   return (
     <MainContainer>
       <Header />
-      <MainHeader>
-        <Link to="/">
-          <Img
-            width={200}
-            height={80}
-            alt=""
-            src="http://localhost:3000/img/logo.png"
-          />
-        </Link>
-        <MenuBox>
-          <IndividualMenu
-            onClick={() => {
-              navigate('/mypage');
-            }}
-          >
-            마이페이지
-          </IndividualMenu>
-          <IndividualMenu
-            onClick={() => {
-              navigate('/signin');
-            }}
-          >
-            로그인
-          </IndividualMenu>
-          <IndividualMenu
-            onClick={() => {
-              navigate('/signup');
-            }}
-          >
-            회원가입
-          </IndividualMenu>
-        </MenuBox>
-      </MainHeader>
+
       <ContentBox>
         <ContentImg>
           <span style={{ fontSize: 30, fontWeight: 500, alignSelf: 'center' }}>
