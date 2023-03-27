@@ -65,14 +65,24 @@ const Register = () => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
+    // FormData의 key 확인
+    for (let key of data.keys()) {
+      console.log(key);
+    }
+
+    // FormData의 value 확인
+    for (let value of data.values()) {
+      console.log(value);
+    }
     const joinData = {
       email: data.get('email'),
       name: data.get('name'),
+      id: data.get('id'),
       password: data.get('password'),
       rePassword: data.get('rePassword'),
     };
-    const { age, city, email, name, password, rePassword } = joinData;
-
+    const { email, name, password, rePassword, id } = joinData;
+    console.log(email, name, password, id);
     // 이메일 유효성 체크
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -160,6 +170,7 @@ const Register = () => {
                     error={emailError !== '' || false}
                   />
                 </Grid>
+                <FormHelperTexts>{emailError}</FormHelperTexts>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -171,7 +182,7 @@ const Register = () => {
                     label="아이디"
                   />
                 </Grid>
-                <FormHelperTexts>{emailError}</FormHelperTexts>
+
                 <Grid item xs={12}>
                   <TextField
                     required
