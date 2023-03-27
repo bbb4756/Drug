@@ -5,7 +5,8 @@ import Gyuri from './pages/Gyuri';
 import Jeon from './pages/Jeon';
 import Counter from './pages/Counter';
 import { MyPage } from './pages/MyPage';
-import { Login } from './pages/Login';
+import SignIn from './pages/SignIn';
+import Register from './pages/Register';
 
 function Router() {
   return (
@@ -16,7 +17,8 @@ function Router() {
         <Route path="/jeon" element={<Jeon />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

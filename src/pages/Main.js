@@ -26,12 +26,18 @@ function Main() {
           </IndividualMenu>
           <IndividualMenu
             onClick={() => {
-              navigate('/login');
+              navigate('/signin');
             }}
           >
             로그인
           </IndividualMenu>
-          <IndividualMenu>로그아웃</IndividualMenu>
+          <IndividualMenu
+            onClick={() => {
+              navigate('/signup');
+            }}
+          >
+            회원가입
+          </IndividualMenu>
         </MenuBox>
       </MainHeader>
       <ContentBox>
