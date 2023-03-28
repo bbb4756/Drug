@@ -11,7 +11,7 @@ const Header = () => {
           width={200}
           height={80}
           alt=""
-          src="http://localhost:3000/img/logo.jpg"
+          src="http://localhost:3000/img/logo.png"
         />
       </Link>
       <MenuBox>
